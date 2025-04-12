@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ログイン</title>
+</head>
+<body>
+    <h1>ログイン</h1>
+    <form id="loginForm">
+        <div>
+            <label for="userId">名前:</label>
+            <input type="text" id="userId" name="userId" required>
+        </div>
+        <div>
+            <label for="password">誕生日:</label>
+            <input type="number" id="password" name="password" required>
+        </div>
+        <button type="submit">送信</button>
+        <p id="errorMessage" style="color: red;"></p>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const errorMessage = document.getElementById('errorMessage');
+
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // デフォルトの送信処理を停止
+
+                const userId = document.getElementById('userId').value;
+                const password = document.getElementById('password').value;
+
+                // 直書きのID/パスワード
+                const correctId = '深澤さくら';
+                const correctPassword = '20020505';
+
+                if (userId === correctId && password === correctPassword) {
+                    // ログイン成功: Detail.mdにリダイレクト
+                    window.location.href = 'Detail.md';
+                } else {
+                    // ログイン失敗: エラーメッセージを表示
+                    errorMessage.textContent = 'IDまたはパスワードが間違っています。';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
