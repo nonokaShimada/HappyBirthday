@@ -4,45 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>誕生日入力</title>
-    <style>
-        #message-container {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/base.css">
 </head>
 <body>
     <h1>「誕生日を入力してください」</h1>
+    <div>
     <form action="#" method="post">
-        <label for="year">年:</label>
-        <input type="number" id="year" name="year" placeholder="YYYY" required>
-        <br>
-        <label for="month">月:</label>
-        <input type="number" id="month" name="month" placeholder="MM" required>
-        <br>
-        <label for="day">日:</label>
-        <input type="number" id="day" name="day" placeholder="DD" required>
-        <br>
+        <input type="number" id="birthday" name="birthday" placeholder="YYYY/MM/DD">
         <button type="submit">送信</button>
     </form>
+    </div>
     <script>
         document.querySelector('form').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            const year = document.getElementById('year').value;
-            const month = document.getElementById('month').value;
-            const day = document.getElementById('day').value;
+            const birthday = document.getElementById('birthday').value;
 
             const messageContainer = document.createElement('div');
             const form = this;
 
-            if (year === "2001" && month === "5" && day === "5") {
-                form.style.display = 'none';
-                messageContainer.innerHTML = `
-                    <p>今目の前にいる人に話かけてください</p>
-                    <button onclick="location.href='#'">次へ</button>
-                `;
+            if (birthday === "20010505" || birthday === "200155") {
+                setTimeout(function() {
+                window.location.href = 'talk.html';
+                });
             } else {
                 messageContainer.innerHTML = `<p>もう一度入力してください</p>`;
+                setTimeout(function() {
+                window.location.href = 'first.html';
+                }, 1000);
             }
 
             form.parentNode.appendChild(messageContainer);

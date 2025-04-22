@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>回答を表示</title>
+</head>
+<body>
+    <title>回答を表示</title>
+  <div id="output"></div>
+
+  <script>
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+      const results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    const id = getParameterByName('id');
+    const value = getParameterByName('value');
+    const outputDiv = document.getElementById('output');
+
+    if (id === 'questionNumber') {
+      if (value === 'talk') {
+
+        window.location.href = `first.html?id=${id}&value=${value}`;
+        
+      } else if (value === 'b') {
+        outputDiv.textContent = 'EFGH';
+      } else if (value === 'c') {
+        outputDiv.textContent = 'IJKL';
+      } else if (value === 'd') {
+        outputDiv.textContent = 'MNOP';
+      } else {
+        outputDiv.textContent = 'Invalid value received.';
+      }
+    } else {
+      outputDiv.textContent = 'Invalid ID received.';
+    }
+  </script>
+</body>
+</html>

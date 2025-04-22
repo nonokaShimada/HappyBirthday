@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+</body>
+
+<html>
+<head>
+  <title>Index Page</title>
+</head>
+<body>
+  <button onclick="saveAndRedirect('a')">Send 'a'</button>
+  <button onclick="saveAndRedirect('b')">Send 'b'</button>
+  <button onclick="saveAndRedirect('c')">Send 'c'</button>
+  <button onclick="saveAndRedirect('d')">Send 'd'</button>
+
+  <script>
+    function saveAndRedirect(value) {
+      const dataToSend = { id: 'index', value: value };
+      localStorage.setItem('myData', JSON.stringify(dataToSend)); // localStorageに保存
+      window.location.href = 'next.html';
+    }
+  </script>
+</body>
+</html>

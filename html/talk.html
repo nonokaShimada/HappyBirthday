@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>誕生日入力後</title>
+    <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+    <p>今目の前にいる人に話かけてください</p>
+    <button onclick="sendData('talk')">次へ</button>
+
+<script>
+    function sendData(value) {
+      const id = 'questionNumber';
+      window.location.href = `correct.html?id=${id}&value=${value}`;
+    }
+</script>
+</body>
