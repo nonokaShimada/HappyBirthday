@@ -1,43 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>回答を表示</title>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正解</title>
+    <link rel="stylesheet" href="../css/base.css">
+  </head>
 <body>
-    <title>回答を表示</title>
-  <div id="output"></div>
+  <h1>正解！</h1>
+  <br>
+ <button id="next">次へ</button>
+ 
+  <div id="hint"></div>
+  <div id="url"></div>
 
   <script>
     function getParameterByName(name, url = window.location.href) {
       name = name.replace(/[\[\]]/g, '\\$&');
-      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-      const results = regex.exec(url);
+      let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+      let results = regex.exec(url);
       if (!results) return null;
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-    const id = getParameterByName('id');
-    const value = getParameterByName('value');
-    const outputDiv = document.getElementById('output');
+    document.getElementById("next").addEventListener("click", function() {
+      let key = localStorage.getItem('key') || getParameterByName('key');
+      let value = localStorage.getItem('value') || getParameterByName('value');
+      let hint = document.getElementById('hint');
+      let url = document.getElementById('url');
 
-    if (id === 'questionNumber') {
-      if (value === 'talk') {
+      // Save key and value to localStorage
+      if (key && value) {
+        localStorage.setItem('key', key);
+        localStorage.setItem('value', value);
+      }
 
-        window.location.href = `first.html?id=${id}&value=${value}`;
-        
+    if (key === 'questionNumber') {
+      if (value === 'kakizome') {
+      hint.innerHTML = '毎月食べたいものと言えば・・・';
+      url.innerHTML = '参考URL:https://www.kumon.ne.jp/kumonnow/topics/vol502/#:~:text=%E6%9B%B8%E5%88%9D%E3%82%81%E3%81%AE%E8%B5%B7%E6%BA%90%E3%81%AF%E5%B9%B3%E5%AE%89%E6%99%82%E4%BB%A3,-%E6%AD%8C%E5%B7%9D%E8%B1%8A%E5%9B%BD%E3%80%8C%E9%A2%A8%E6%B5%81&text=%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB%E3%81%AB%E3%80%8C%E5%90%89%E6%9B%B8%E3%81%AF%E3%81%98%E3%82%81,%E4%B8%AD%E3%81%AB%E5%BA%83%E3%81%8C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82';
       } else if (value === 'b') {
-        outputDiv.textContent = 'EFGH';
+        hint.innerHTML = 'EFGH';
       } else if (value === 'c') {
-        outputDiv.textContent = 'IJKL';
+        hint.innerHTML = 'IJKL';
       } else if (value === 'd') {
-        outputDiv.textContent = 'MNOP';
+        hint.innerHTML = 'MNOP';
       } else {
-        outputDiv.textContent = 'Invalid value received.';
+        hint.innerHTML = 'Invalid value received.';
       }
     } else {
-      outputDiv.textContent = 'Invalid ID received.';
+      hint.innerHTML = 'Invalid ID received.';
     }
+  });
   </script>
 </body>
 </html>

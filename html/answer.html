@@ -1,48 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>回答を入力</title>
-    <link rel="stylesheet" href="../css/base.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>回答を入力</title>
+  <link rel="stylesheet" href="../css/base.css">
 </head>
 <body>
-    <h1>「回答を入力してください」</h1>
-    <div>
-        <form action="#" method="post">
-           <input type="text" id="answer" name="answer" placeholder="回答を入力してください">
-           <button onclick="sendData('answer')">次へ</button>
-        </form>
-        </div>
+  <h1>「回答を入力してください」</h1>
+  <div>
+    <form action="#" method="post">
+       <input type="text" id="inputAnswer" name="inputAnswer" placeholder="回答を入力してください">
+       <button type="button" onclick="sendData()">次へ</button>
+    </form>
+  </div>
+  <div id="output"></div>
   <script>
     function getParameterByName(name, url = window.location.href) {
       name = name.replace(/[\[\]]/g, '\\$&');
-      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-      const results = regex.exec(url);
+      let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+      let results = regex.exec(url);
       if (!results) return null;
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-    const id = getParameterByName('id');
-    const value = getParameterByName('value');
-    const outputDiv = document.getElementById('output');
+    function sendData() {
+      let key = localStorage.getItem('key') || getParameterByName('key');
+      let value = localStorage.getItem('value') || getParameterByName('value');
+      let outputDiv = document.getElementById('output');
+      let inputAnswer = document.getElementById('inputAnswer');
 
-    if (id === 'questionNumber') {
-      if (value === 'talk') {
-        window.location.href = `first.html?id=${id}&value=${value}`;
-        
-      } else if (value === 'b') {
-        outputDiv.textContent = 'EFGH';
-      } else if (value === 'c') {
-        outputDiv.textContent = 'IJKL';
-      } else if (value === 'd') {
-        outputDiv.textContent = 'MNOP';
-      } else {
-        outputDiv.textContent = 'Invalid value received.';
+      // Save key and value to localStorage
+      if (key && value) {
+        localStorage.setItem('key', key);
+        localStorage.setItem('value', value);
       }
-    } else {
-      outputDiv.textContent = 'Invalid ID received.';
+
+      if (key === 'questionNumber') {
+        if (value === 'talk') {
+          if (inputAnswer.value === '書初め' || inputAnswer.value === 'かきぞめ') {
+            value = 'kakizome';
+            window.location.href = `correct.html?id=${key}&value=${value}`;
+          } else {
+            alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
+          }
+        } else if (value === 'b') {
+          outputDiv.textContent = 'EFGH';
+        } else if (value === 'c') {
+          outputDiv.textContent = 'IJKL';
+        } else if (value === 'd') {
+          outputDiv.textContent = 'MNOP';
+        } else {
+          outputDiv.textContent = 'Invalid value received.';
+        }
+      } else {
+        outputDiv.textContent = 'Invalid ID received.';
+      }
     }
   </script>
 </body>

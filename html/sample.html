@@ -20,7 +20,7 @@
 
   <script>
     function saveAndRedirect(value) {
-      const dataToSend = { id: 'index', value: value };
+      let dataToSend = { id: 'index', value: value };
       localStorage.setItem('myData', JSON.stringify(dataToSend)); // localStorageに保存
       window.location.href = 'next.html';
     }
