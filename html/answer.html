@@ -26,8 +26,8 @@
     }
 
     function sendData() {
-      let key = localStorage.getItem('key') || getParameterByName('key');
-      let value = localStorage.getItem('value') || getParameterByName('value');
+      let key = getParameterByName('key') || localStorage.getItem('key');
+      let value = getParameterByName('value') || localStorage.getItem('value');
       let outputDiv = document.getElementById('output');
       let inputAnswer = document.getElementById('inputAnswer');
 
@@ -45,14 +45,65 @@
           } else {
             alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
           }
-        } else if (value === 'b') {
-          outputDiv.textContent = 'EFGH';
-        } else if (value === 'c') {
-          outputDiv.textContent = 'IJKL';
-        } else if (value === 'd') {
-          outputDiv.textContent = 'MNOP';
-        } else {
-          outputDiv.textContent = 'Invalid value received.';
+        } else if (value === 'kakizome') {
+          if (inputAnswer.value === 'マチュピチュ' || inputAnswer.value === 'まちゅぴちゅ') {
+            value = 'machuPicchu';
+            window.location.href = `correct.html?id=${key}&value=${value}`;
+          } else {
+            alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
+          }
+        } else if (value === 'machuPicchu') {
+          if (inputAnswer.value === 'シーザー' || inputAnswer.value === 'カエサル') {
+            value = 'caesar';
+            window.location.href = `correct.html?id=${key}&value=${value}`;
+          } else {
+            alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
+          }
+        } else if (value === 'caesar') {
+          if (inputAnswer.value === 'yokubounohako' || inputAnswer.value === 'よくぼうのはこ'|| inputAnswer.value === '欲望の箱') {
+            value = 'iety';
+            window.location.href = `correct.html?id=${key}&value=${value}`;
+          } else {
+            alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
+          }
+        } else if (value === 'iety') {
+          if (inputAnswer.value === 'NotYet') {
+            value = 'notyet';
+            window.location.href = `correct.html?id=${key}&value=${value}`;
+          } else {
+            alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
+          }
+        } else if (value === 'notyet') {
+          if (inputAnswer.value === 'エニグマ' || inputAnswer.value === 'えにぐま') {
+            value = 'enigma';
+            window.location.href = `correct.html?id=${key}&value=${value}`;
+          } else {
+            alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
+          }
+        } else if (value === 'enigma') {
+          if (inputAnswer.value === 'アドベントカレンダー' || inputAnswer.value === 'adventcalendar') {
+            value = 'advent';
+            window.location.href = `correct.html?id=${key}&value=${value}`;
+          } else {
+            alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
+          }
+        } else if (value === 'advent') {
+          if (inputAnswer.value === 'ハリーポッター' || inputAnswer.value === 'HarryPotter') {
+            value = 'harry';
+            window.location.href = `correct.html?id=${key}&value=${value}`;
+          } else {
+            alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
+          }
+        } else if (value === 'harry') {
+          if (inputAnswer.value === '炊飯器' || inputAnswer.value === 'すいはんき' || inputAnswer.value === 'suihanki') {
+            value = 'suihanki';
+            window.location.href = `last.html`;
+          } else {
+            alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
+          }
+        }
+        else {
+          outputDiv.textContent = 'Invalid value received. value: ' + value;
         }
       } else {
         outputDiv.textContent = 'Invalid ID received.';
