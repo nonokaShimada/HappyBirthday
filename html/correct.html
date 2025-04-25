@@ -68,7 +68,7 @@
       }
       nextAnswer.style.display = 'block';
       nextAnswer.onclick = function() {
-        window.location.href = `answer.html?id=${key}&value=${value}`;
+        window.location.href = `answer.html?key=${key}&value=${value}`;
       }
     } else {
       hint.innerHTML = 'Invalid ID received. Key: ' + key;

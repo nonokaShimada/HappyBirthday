@@ -16,13 +16,19 @@
   </div>
   <div id="output"></div>
   <script>
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+      let results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
 
     function sendData() {
-  const urlParams = new URLSearchParams(window.location.search);
-  let key = urlParams.get('key') || localStorage.getItem('key');
-  let value = urlParams.get('value') || localStorage.getItem('value');
-  let outputDiv = document.getElementById('output');
-  let inputAnswer = document.getElementById('inputAnswer');
+      let key = getParameterByName('key') || localStorage.getItem('key');
+      let value = getParameterByName('value') || localStorage.getItem('value');
+      let inputAnswer = document.getElementById('inputAnswer');
 
       // Save key and value to localStorage
       if (key && value) {
@@ -34,56 +40,56 @@
         if (value === 'talk') {
           if (inputAnswer.value === '書初め' || inputAnswer.value === 'かきぞめ') {
             value = 'kakizome';
-            window.location.href = `correct.html?id=${key}&value=${value}`;
+            window.location.href = `correct.html?key=${key}&value=${value}`;
           } else {
             alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
           }
         } else if (value === 'kakizome') {
           if (inputAnswer.value === 'マチュピチュ' || inputAnswer.value === 'まちゅぴちゅ') {
             value = 'machuPicchu';
-            window.location.href = `correct.html?id=${key}&value=${value}`;
+            window.location.href = `correct.html?key=${key}&value=${value}`;
           } else {
             alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
           }
         } else if (value === 'machuPicchu') {
           if (inputAnswer.value === 'シーザー' || inputAnswer.value === 'カエサル') {
             value = 'caesar';
-            window.location.href = `correct.html?id=${key}&value=${value}`;
+            window.location.href = `correct.html?key=${key}&value=${value}`;
           } else {
             alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
           }
         } else if (value === 'caesar') {
           if (inputAnswer.value === 'yokubounohako' || inputAnswer.value === 'よくぼうのはこ'|| inputAnswer.value === '欲望の箱') {
             value = 'iety';
-            window.location.href = `correct.html?id=${key}&value=${value}`;
+            window.location.href = `correct.html?key=${key}&value=${value}`;
           } else {
             alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
           }
         } else if (value === 'iety') {
           if (inputAnswer.value === 'NotYet') {
             value = 'notyet';
-            window.location.href = `correct.html?id=${key}&value=${value}`;
+            window.location.href = `correct.html?key=${key}&value=${value}`;
           } else {
             alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
           }
         } else if (value === 'notyet') {
           if (inputAnswer.value === 'エニグマ' || inputAnswer.value === 'えにぐま') {
             value = 'enigma';
-            window.location.href = `correct.html?id=${key}&value=${value}`;
+            window.location.href = `correct.html?key=${key}&value=${value}`;
           } else {
             alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
           }
         } else if (value === 'enigma') {
           if (inputAnswer.value === 'アドベントカレンダー' || inputAnswer.value === 'adventcalendar') {
             value = 'advent';
-            window.location.href = `correct.html?id=${key}&value=${value}`;
+            window.location.href = `correct.html?key=${key}&value=${value}`;
           } else {
             alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
           }
         } else if (value === 'advent') {
           if (inputAnswer.value === 'ハリーポッター' || inputAnswer.value === 'HarryPotter') {
             value = 'harry';
-            window.location.href = `correct.html?id=${key}&value=${value}`;
+            window.location.href = `correct.html?key=${key}&value=${value}`;
           } else {
             alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
           }
@@ -99,7 +105,7 @@
           outputDiv.textContent = 'Invalid value received. value: ' + value;
         }
       } else {
-        outputDiv.textContent = 'Invalid ID received. id: ' + key;
+        outputDiv.textContent = 'Invalid ID received. key: ' + key;
       }
     }
   </script>
