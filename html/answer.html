@@ -40,7 +40,7 @@
         if (value === 'talk') {
           if (inputAnswer.value === '書初め' || inputAnswer.value === 'かきぞめ') {
             value = 'kakizome';
-            window.location.href = `html/correct.html?key=${key}&value=${value}`;
+            window.location.href = `correct.html?key=${key}&value=${value}`;
           } else {
             alert('不正解です。もう一度入力してください。'); // 簡単なエラー表示
           }
